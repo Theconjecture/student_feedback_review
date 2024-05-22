@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback System - Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+        .rating {
+            text-align: center;
+        }
+        .button-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .back-button {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Student Feedback System
+    </header>
+    <form id="reviewForm" method="POST" action="/submit_review">
+        <label for="course_code">Course Code:</label>
+        <input type="text" id="course_code" name="course_code" readonly>
+
+        <label for="lecturer_name">Lecturer Name:</label>
+        <input type="text" id="lecturer_name" name="lecturer_name" readonly>
+
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Rating</th>
+            </tr>
+            <tr>
+                <td>Punctuality</td>
+                <td class="rating">
+                    <input type="radio" name="punctuality" value="1" required> 1
+                    <input type="radio" name="punctuality" value="2"> 2
+                    <input type="radio" name="punctuality" value="3"> 3
+                    <input type="radio" name="punctuality" value="4"> 4
+                    <input type="radio" name="punctuality" value="5"> 5
+                </td>
+            </tr>
+            <tr>
+                <td>Ease of Delivering Information</td>
+                <td class="rating">
+                    <input type="radio" name="ease_of_delivering" value="1" required> 1
+                    <input type="radio" name="ease_of_delivering" value="2"> 2
+                    <input type="radio" name="ease_of_delivering" value="3"> 3
+                    <input type="radio" name="ease_of_delivering" value="4"> 4
+                    <input type="radio" name="ease_of_delivering" value="5"> 5
+                </td>
+            </tr>
+            <tr>
+                <td>Knowledge of Subject</td>
+                <td class="rating">
+                    <input type="radio" name="knowledge" value="1" required> 1
+                    <input type="radio" name="knowledge" value="2"> 2
+                    <input type="radio" name="knowledge" value="3"> 3
+                    <input type="radio" name="knowledge" value="4"> 4
+                    <input type="radio" name="knowledge" value="5"> 5
+                </td>
+            </tr>
+            <tr>
+                <td>Interaction with Students</td>
+                <td class="rating">
+                    <input type="radio" name="interaction" value="1" required> 1
+                    <input type="radio" name="interaction" value="2"> 2
+                    <input type="radio" name="interaction" value="3"> 3
+                    <input type="radio" name="interaction" value="4"> 4
+                    <input type="radio" name="interaction" value="5"> 5
+                </td>
+            </tr>
+        </table>
+
+        <label for="unique">What makes them unique?</label>
+        <textarea id="unique" name="unique" rows="4" maxlength="500" minlength="50" required></textarea>
+
+        <div class="button-container">
+            <button type="submit" class="submit-button">Submit</button>
+            <button type="button" class="back-button" onclick="window.history.back()">Back</button>
+        </div>
+    </form>
+
+    <script>
+        // Script to autofill the course code and lecturer name
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            document.getElementById('course_code').value = urlParams.get('course_code');
+            document.getElementById('lecturer_name').value = urlParams.get('lecturer_name');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Feedback System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        .review-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .submitted-button {
+            background-color: #808080;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: not-allowed;
+        }
+        .logout-button {
+            margin-top: 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+    <script>
+        function redirectToReview(courseCode, lecturerName) {
+            const url = `/review.html?course_code=${courseCode}&lecturer_name=${lecturerName}`;
+            window.location.href = url;
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const submittedCourse = urlParams.get('course_code');
+            const submittedLecturer = urlParams.get('lecturer_name');
+
+            if (submittedCourse && submittedLecturer) {
+                const buttons = document.querySelectorAll('.review-button');
+                buttons.forEach(button => {
+                    if (button.getAttribute('data-course-code') === submittedCourse &&
+                        button.getAttribute('data-lecturer-name') === submittedLecturer) {
+                        button.textContent = 'Review Submitted';
+                        button.className = 'submitted-button';
+                        button.disabled = true;
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        Student Feedback System
+    </header>
+    <table>
+        <tr>
+            <th>Course Code</th>
+            <th>Lecturer</th>
+            <th>Review</th>
+        </tr>
+        <tr>
+            <td>CS101</td>
+            <td>John Doe</td>
+            <td><button class="review-button" data-course-code="CS101" data-lecturer-name="John Doe" onclick="redirectToReview('CS101', 'John Doe')">Review</button></td>
+        </tr>
+        <tr>
+            <td>MATH201</td>
+            <td>Jane Smith</td>
+            <td><button class="review-button" data-course-code="MATH201" data-lecturer-name="Jane Smith" onclick="redirectToReview('MATH201', 'Jane Smith')">Review</button></td>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+    <button class="logout-button" onclick="window.location.href='/login.html'">Logout</button>
+</body>
+</html>

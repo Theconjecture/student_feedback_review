@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Submitted</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .message-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .message-container h2 {
+            color: #4CAF50;
+        }
+    </style>
+    <script>
+        // Get course code and lecturer name from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseCode = urlParams.get('course_code');
+        const lecturerName = urlParams.get('lecturer_name');
+
+        // Redirect to feedback page with course code and lecturer name after 5 seconds
+        setTimeout(function() {
+            const url = `/feedback.html?course_code=${courseCode}&lecturer_name=${lecturerName}`;
+            window.location.href = url;
+        }, 5000); // 5000 milliseconds = 5 seconds
+    </script>
+</head>
+<body>
+    <div class="message-container">
+        <h2>Review Submitted</h2>
+        <p>Thank you for your feedback! You will be redirected to the main page shortly.</p>
+    </div>
+</body>
+</html>
